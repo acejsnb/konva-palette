@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>palette</title>
+    <style>
+        .box {
+            background-color: #ccc;
+            width: 1200px;
+            height: 800px;
+        }
+        button.active {
+            color: #f00;
+        }
+        #btnList {
+            display: inline;
+        }
+        #container {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="tools">
+        <div id="btnList">
+            <button onclick="flagFn(this, 'pencil');">铅笔</button>
+            <button onclick="flagFn(this, 'ellipse');">椭圆-空心</button>
+            <button onclick="flagFn(this, 'rect');">矩形</button>
+            <button onclick="flagFn(this, 'rectH');">矩形-空心</button>
+        </div>
+        <button onclick="removeFn();">删除</button>
+    </div>
+
+    <div id="container"></div>
+</div>
+
+<script src="../konva.js"></script>
+<script src="./js/palette.js"></script>
+<script>
+    let draw=[], // 绘制的图形数组
+        graphNow=null, // 当前图形
+        flag=null, // 激活绘制-铅笔 pencil:铅笔 ellipse:椭圆 rect:矩形 rectH:矩形-空心
+        drawing=false, // 绘制中
+        pointStart=[]; // 初始坐标
+
+    // 点击画图
+    function flagFn(t, v) {
+        flag=v;
+        let tools=document.getElementById('btnList')
+            ,aBtn=tools.getElementsByTagName('button');
+        for (let i=0; i<aBtn.length; i++) {
+            aBtn[i].className='';
+        }
+        t.classList.add('active');
+    }
+
+    // 移除图形
+    function removeFn() {
+        if (graphNow) {
+            graphNow.remove();
+            stage.find('Transformer').destroy();
+            layer.draw();
+            graphNow=null;
+        } else {
+            alert('请选择图形')
+        }
+    }
+
+    // 1 create stage
+    const stage=new Konva.Stage({
+        container: 'container',
+        width: 1200,
+        height: 800
+    });
+
+    // 2 create layer
+    const layer=new Konva.Layer();
+    stage.add(layer);
+
+    // 3 create our shape
+    // 画椭圆
+    // drawEllipse();
+    // drawPencil([5, 70, 140, 23], 'red', 4)
+    // drawRect(20, 20, 122, 50, 'red', 4);
+
+    // 移除改变大小事件
+    stage.on('mousedown', function(e) {
+        // 如果点击空白处 移除图形选择框
+        // console.log(e);
+
+        if (e.target === stage) {
+            stageMousedown(flag, e);
+
+            // 移除图形选择框
+            stage.find('Transformer').destroy();
+            layer.draw();
+            return;
+        }
+        // 如果没有匹配到就终止往下执行
+        if (!e.target.hasName('line') && !e.target.hasName('ellipse') && !e.target.hasName('rect') && !e.target.hasName('circle')) {
+            return;
+        }
+        // 移除图形选择框
+        stage.find('Transformer').destroy();
+
+        // 当前点击的对象赋值给graphNow
+        graphNow=e.target;
+        // 创建图形选框事件
+        const tr = new Konva.Transformer();
+        layer.add(tr);
+        tr.attachTo(e.target);
+        layer.draw();
+    });
+
+    // 鼠标移动
+    stage.on('mousemove', function (e) {
+        if (graphNow && flag && drawing) {
+            stageMousemove(flag, e);
+        }
+    });
+
+    // 鼠标放开
+    stage.on('mouseup', function (e) {
+        drawing=false;
+        // graphNow=null;
+    });
+</script>
+</body>
+</html>
