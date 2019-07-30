@@ -1,7 +1,7 @@
 # konvajs制作画板功能 类似QQ截图 可拖动
 [demo演示](https://xiongshuang.github.io/konva-palette/palette/index.html)
 
-![截图演示](https://github.com/xiongshuang/konva-palette/blob/master/%E7%94%BB%E6%9D%BFpalette.gif)
+![截图演示](https://github.com/xiongshuang/konva-palette/blob/master/palette.gif)
 
 ## first 变量申明
 
