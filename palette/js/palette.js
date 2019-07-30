@@ -226,20 +226,20 @@ function stageMousedown(flag, ev) {
 
         switch (flag) {
             case 'pencil':
-                drawPencil(pointStart, 'red', 2);
+                drawPencil(pointStart, graphColor, 2);
                 break;
             case 'ellipse':
                 // 椭圆
-                drawEllipse(x, y, 0, 0, 'red', 2);
+                drawEllipse(x, y, 0, 0, graphColor, 2);
                 break;
             case 'rect':
-                drawRect(x, y, 0, 0, 'red', 0);
+                drawRect(x, y, 0, 0, graphColor, 0);
                 break;
             case 'rectH':
-                drawRect(x, y, 0, 0, 'red', 2);
+                drawRect(x, y, 0, 0, graphColor, 2);
                 break;
             case 'text':
-                drawText(x, y, 'red', 16);
+                drawText(x, y, graphColor, 16);
                 break;
             default:
                 break;

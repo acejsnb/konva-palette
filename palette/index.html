@@ -30,6 +30,11 @@
             <button onclick="flagFn(this, 'rectH');">矩形-空心</button>
             <button onclick="flagFn(this, 'text');">文字</button>
         </div>
+        <select id="selectColor" onchange="selectColorFn(this);">
+            <option value="red">红色</option>
+            <option value="blue">蓝色</option>
+            <option value="green">绿色</option>
+        </select>
         <button onclick="removeFn();">删除</button>
     </div>
 
@@ -43,6 +48,7 @@
         graphNow=null, // 当前图形
         flag=null, // 激活绘制-铅笔 pencil:铅笔 ellipse:椭圆 rect:矩形 rectH:矩形-空心
         drawing=false, // 绘制中
+        graphColor='red',
         pointStart=[]; // 初始坐标
 
     // 点击画图
@@ -54,6 +60,11 @@
             aBtn[i].className='';
         }
         t.classList.add('active');
+    }
+
+    // 选择颜色
+    function selectColorFn(t) {
+        graphColor=t.value;
     }
 
     // 移除图形
