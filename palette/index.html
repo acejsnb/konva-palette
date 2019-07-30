@@ -28,6 +28,7 @@
             <button onclick="flagFn(this, 'ellipse');">椭圆-空心</button>
             <button onclick="flagFn(this, 'rect');">矩形</button>
             <button onclick="flagFn(this, 'rectH');">矩形-空心</button>
+            <button onclick="flagFn(this, 'text');">文字</button>
         </div>
         <button onclick="removeFn();">删除</button>
     </div>
@@ -35,7 +36,7 @@
     <div id="container"></div>
 </div>
 
-<script src="../konva.js"></script>
+<script src="js/konva.js"></script>
 <script src="./js/palette.js"></script>
 <script>
     let draw=[], // 绘制的图形数组
@@ -121,9 +122,9 @@
     });
 
     // 鼠标放开
-    stage.on('mouseup', function (e) {
+    stage.on('mouseup', function () {
         drawing=false;
-        // graphNow=null;
+        if (flag === 'text') flag=null;
     });
 </script>
 </body>
