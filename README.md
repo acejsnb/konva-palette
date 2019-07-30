@@ -9,7 +9,7 @@
         graphNow=null, // 当前图形
         flag=null, // 激活绘制-铅笔 pencil:铅笔 ellipse:椭圆 rect:矩形 rectH:矩形-空心
         drawing=false, // 绘制中
-        graphColor='red',
+        graphColor='red', // 默认颜色
         pointStart=[]; // 初始坐标
 
 ## second 获得Konva对象
@@ -28,51 +28,51 @@
     // 3 create our shape
     
     // 移除改变大小事件
-        stage.on('mousedown', function(e) {
-            // 如果点击空白处 移除图形选择框
-            // console.log(e);
+    stage.on('mousedown', function(e) {
+        // 如果点击空白处 移除图形选择框
+        // console.log(e);
     
-            if (e.target === stage) {
-                stageMousedown(flag, e);
+        if (e.target === stage) {
+            stageMousedown(flag, e);
     
-                // 移除图形选择框
-                stage.find('Transformer').destroy();
-                layer.draw();
-                return;
-            }
-            // 如果没有匹配到就终止往下执行
-            if (!e.target.hasName('line') && !e.target.hasName('ellipse') && !e.target.hasName('rect') && !e.target.hasName('circle')) {
-                return;
-            }
             // 移除图形选择框
             stage.find('Transformer').destroy();
-    
-            // 当前点击的对象赋值给graphNow
-            graphNow=e.target;
-            // 创建图形选框事件
-            const tr = new Konva.Transformer({
-                borderStroke: '#000', // 虚线颜色
-                borderStrokeWidth: 1, //虚线大小
-                borderDash: [5], // 虚线间距
-                keepRatio: false // 不等比缩放
-            });
-            layer.add(tr);
-            tr.attachTo(e.target);
             layer.draw();
+            return;
+        }
+        // 如果没有匹配到就终止往下执行
+        if (!e.target.hasName('line') && !e.target.hasName('ellipse') && !e.target.hasName('rect') && !e.target.hasName('circle')) {
+            return;
+        }
+        // 移除图形选择框
+        stage.find('Transformer').destroy();
+    
+        // 当前点击的对象赋值给graphNow
+        graphNow=e.target;
+        // 创建图形选框事件
+        const tr = new Konva.Transformer({
+            borderStroke: '#000', // 虚线颜色
+            borderStrokeWidth: 1, //虚线大小
+            borderDash: [5], // 虚线间距
+            keepRatio: false // 不等比缩放
         });
-        
-        // 鼠标移动
-            stage.on('mousemove', function (e) {
-                if (graphNow && flag && drawing) {
-                    stageMousemove(flag, e);
-                }
-            });
-        
-            // 鼠标放开
-            stage.on('mouseup', function () {
-                drawing=false;
-                if (flag === 'text') flag=null;
-            });
+        layer.add(tr);
+        tr.attachTo(e.target);
+        layer.draw();
+    });
+    
+    // 鼠标移动
+        stage.on('mousemove', function (e) {
+            if (graphNow && flag && drawing) {
+                stageMousemove(flag, e);
+            }
+        });
+    
+        // 鼠标放开
+        stage.on('mouseup', function () {
+            drawing=false;
+            if (flag === 'text') flag=null;
+        });
 
 ## three 绘制
 ### 1.铅笔
