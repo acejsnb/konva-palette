@@ -1,10 +1,9 @@
-:file_folder:
-# konvajs(canvas)制作画板功能 类似QQ截图 可拖动
+# canvas2D库canvas konvajs制作画板功能 类似QQ截图 可拖动
 [demo演示](https://xiongshuang.github.io/konva-palette/palette/index.html)
 
 ![截图演示](https://github.com/xiongshuang/konva-palette/blob/master/palette.gif)
 
-## first 变量申明
+## 一、 变量申明
 
     let draw=[], // 绘制的图形数组
         graphNow=null, // 当前图形
@@ -13,7 +12,7 @@
         graphColor='red', // 默认颜色
         pointStart=[]; // 初始坐标
 
-## second 获得Konva对象
+## 二、 获得Konva对象
 
     // 1 create stage
     const stage=new Konva.Stage({
@@ -75,7 +74,7 @@
             if (flag === 'text') flag=null;
         });
 
-## three 绘制
+## 三、 绘制
 ### 1.铅笔
 
     // 铅笔
