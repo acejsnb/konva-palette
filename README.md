@@ -1,4 +1,4 @@
-# canvas2D库canvas konvajs制作画板功能 类似QQ截图 可拖动
+# canvas2D库konva konvajs制作画板功能 类似QQ截图 可拖动
 [demo演示](https://xiongshuang.github.io/konva-palette/palette/index.html)
 
 ![截图演示](https://github.com/xiongshuang/konva-palette/blob/master/palette.gif)
